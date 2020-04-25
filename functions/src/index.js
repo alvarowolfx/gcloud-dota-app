@@ -41,9 +41,9 @@ async function fetchHeroById(id) {
         hero.bestHeroes[id] = {
           id,
           name,
-          advantange: arr[2],
-          winRate: arr[3],
-          matches: arr[4]
+          advantange: parseFloat(arr[2]),
+          winRate: parseFloat(arr[3]),
+          matches: parseInt(arr[4].replace(',',''),10)
         }
       })
     }
@@ -57,9 +57,9 @@ async function fetchHeroById(id) {
         hero.worstHeroes[id] = {
           id,
           name,
-          disadvantange: arr[2],
-          winRate: arr[3],
-          matches: arr[4]
+          advantange: parseFloat(arr[2]),
+          winRate: parseFloat(arr[3]),
+          matches: parseInt(arr[4].replace(',',''),10)
         }
       })
     }
@@ -76,9 +76,8 @@ exports.fetchDotaBuffHeroById = functions.pubsub.topic(fetchDotaHeroTopic)
       const hero = await fetchHeroById(id)
       const heroRef = db.ref('/heroes').child(id)
       await heroRef.update(hero)
-      //res.json(hero)
     } catch (err) {
-      //res.status(404).json({ message: err.message })
+      console.error(err)
     }
   })
 
@@ -123,6 +122,4 @@ exports.scheduledFetchDotaBuffHeroes = functions.pubsub.schedule('0 3 * * *').on
   const heroesRef = db.ref('/heroes')
   await heroesRef.update(heroesMap)
   await Promise.all(publishPromises)
-
-  res.json({ heroes })
 })
