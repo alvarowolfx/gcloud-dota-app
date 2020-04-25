@@ -41,7 +41,7 @@ async function fetchHeroById(id) {
         hero.bestHeroes[id] = {
           id,
           name,
-          advantange: parseFloat(arr[2]),
+          advantage: parseFloat(arr[2]),
           winRate: parseFloat(arr[3]),
           matches: parseInt(arr[4].replace(',',''),10)
         }
@@ -57,7 +57,7 @@ async function fetchHeroById(id) {
         hero.worstHeroes[id] = {
           id,
           name,
-          advantange: parseFloat(arr[2]),
+          advantage: parseFloat(arr[2]),
           winRate: parseFloat(arr[3]),
           matches: parseInt(arr[4].replace(',',''),10)
         }
