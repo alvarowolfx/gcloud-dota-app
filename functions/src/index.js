@@ -12,7 +12,11 @@ const dotaBuffBaseUrl = 'https://www.dotabuff.com'
 const dotaBuffHeroesUrl = `${dotaBuffBaseUrl}/heroes`
 const dotaBuffHeroesUrlBy = (id) => `${dotaBuffBaseUrl}/heroes/${id}`
 
-const toSlug = (text) => text.toLowerCase().split(' ').join('-')
+const toSlug = (text) => {
+  const lower = text.toLowerCase()
+  const cleanText = lower.replace("'", '')
+  return cleanText.split(' ').join('-')
+}
 
 async function fetchHeroById(id) {
   const data = await fetch(dotaBuffHeroesUrlBy(id))
