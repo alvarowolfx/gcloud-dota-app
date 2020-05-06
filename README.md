@@ -2,7 +2,7 @@
 
 This is a pet project that born with the idea of having a nice subject to go through some Live Coding sessions. We are getting data from [DotaBuff](https://dotabuff.com) website to have more info about the heroes and latest matches.
 
-![heroes-list](./.images/screenshot01.jpeg) ![best-heroes](./.images/screenshot02.jpeg) ![worst-heroes](./.images/screenshot03.jpeg)
+<img src="https://github.com/alvarowolfx/gcloud-flutter-dota-app/raw/master/.images/screenshot01.jpeg" width="20%" height="20%" /> <img src="https://github.com/alvarowolfx/gcloud-flutter-dota-app/raw/master/.images/screenshot02.jpeg" width="20%" height="20%" /> <img src="https://github.com/alvarowolfx/gcloud-flutter-dota-app/raw/master/.images/screenshot03.jpeg" width="20%" height="20%" />
 
 That info is going to be used on the Flutter app to build different features, some of them are :
 
