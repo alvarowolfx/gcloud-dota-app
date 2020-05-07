@@ -6,6 +6,7 @@
     "start": "npm run shell",
     "deployFetchDotaBuffHeroById": "firebase deploy --only functions:fetchDotaBuffHeroById",
     "deployScheduledFetchDotaBuffHeroes": "firebase deploy --only functions:scheduledFetchDotaBuffHeroes",
+    "deployDialogflowFulfilment": "firebase deploy --only functions:dialogflowFirebaseFulfillment",
     "logs": "firebase functions:log"
   },
   "engines": {
@@ -14,7 +15,9 @@
   "main": "src/index.js",
   "dependencies": {
     "@google-cloud/pubsub": "^1.7.2",
+    "actions-on-google": "^2.12.0",
     "cheerio": "^1.0.0-rc.3",
+    "dialogflow-fulfillment": "^0.6.1",
     "firebase-admin": "^8.10.0",
     "firebase-functions": "^3.6.0",
     "node-fetch": "^2.6.0"

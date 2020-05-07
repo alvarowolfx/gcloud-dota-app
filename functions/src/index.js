@@ -3,6 +3,7 @@ const fetch =  require('node-fetch');
 const cheerio = require('cheerio');
 const firebaseAdmin = require('firebase-admin');
 const { PubSub } = require('@google-cloud/pubsub')
+const { WebhookClient } = require('dialogflow-fulfillment')
 
 firebaseAdmin.initializeApp()
 
@@ -127,3 +128,189 @@ exports.scheduledFetchDotaBuffHeroes = functions.pubsub.schedule('0 3 * * *').on
   await heroesRef.update(heroesMap)
   await Promise.all(publishPromises)
 })
+
+function joinOr(names, joiner= 'ou'){
+  if(names.length === 0){
+    return 0
+  }
+
+  if(names.length === 1){
+    return names[0]
+  }
+
+  if(names.length === 2){
+    return names.join(` ${joiner} `)
+  }
+
+  if(names.length > 2){
+    const firstNames = names.slice(0,-1)
+    const lastName = names[names.length - 1]
+    return firstNames.join(', ') + ` ${joiner} ` + lastName
+  }
+}
+
+function pickOne(list){
+  const max = list.length
+  const pick = Math.floor(Math.random() * max)
+  return list[pick]
+}
+
+const translation = {
+  'en' : {
+    'bestHeroThinking' : (names) => `Ok, let me check which heroes are good against ${joinOr(names,'or')}`,
+    'bestHeroAnswer' : (names) => {
+      const isManyRec = names.length > 1
+      return [
+        `Humm, looks like ${isManyRec ? 'those heroes are good' : 'this hero is good'} for you to pick, ${joinOr(names,'or')}.`
+      ]
+    }
+  },
+  'pt-br': {
+    'bestHeroThinking' : (names) => `Ok, deixe me checar aqui quais herois são bons contra ${joinOr(names)}`,
+    'bestHeroAnswer' : (names) => {
+      const isManyRec = names.length > 1
+      return [
+        `Humm, parece que ${isManyRec ? 'esses herois são bons' : 'esse heroi é bom'} para você pegar, ${joinOr(names)}.`,
+        `Parece q se você pegar ${joinOr(names)} você vai ter boas chances.`,
+        `Olhando as últimas partidas, parece que ${joinOr(names)} ${isManyRec ? 'são bons' : 'é bom'} neste cenário.`
+      ]
+    }
+  }
+}
+
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
+  const agent = new WebhookClient({ request, response })
+  console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
+  console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+
+  function welcome(agent) {
+    agent.add(`Welcome to my agent!`);
+  }
+
+  function fallback(agent) {
+    agent.add(`I didn't understand`);
+    agent.add(`I'm sorry, can you try again?`);
+  }
+
+  /**
+   * Best Hero Intent
+   * @param {WebhookClient} agent
+   */
+  async function bestHeroHandler(agent){
+    const { locale } = agent
+    const { heroes } = agent.parameters
+    //const isMany = heroes.length > 1
+
+    async function loadHeroesList(ids){
+      const heroesRef = db.ref('/heroes')
+      const heroesPromises = ids.map( async (id) => {
+        const heroSnap = await heroesRef.child(id).once('value')
+        return heroSnap.val()
+      })
+      return Promise.all(heroesPromises)
+    }
+
+    const heroesData = await loadHeroesList(heroes)
+    const names = heroesData.map( h => h.name )
+    agent.add(translation[locale].bestHeroThinking(names))
+
+    // 1º Strategy - Intersection
+    const worstHeroesSet = heroesData.map( hero => {
+      const { id, worstHeroes } = hero
+      const worstHeroesIds = Object.keys(worstHeroes)
+      const set = new Set([...worstHeroesIds])
+      return { id, set }
+    })
+
+    const intersections = {}
+    worstHeroesSet.forEach( heroA => {
+      worstHeroesSet.forEach( heroB => {
+        if(heroA.id === heroB.id){
+          return
+        }
+        const setA = heroA.set
+        const setB = heroB.set
+        const intersection = new Set(
+          [...setA].filter(x => setB.has(x)))
+        const heroesList = Array.from(intersection.values())
+        heroesList.forEach( heroId => {
+          intersections[heroId] = intersections[heroId] || 0
+          intersections[heroId] += 1
+        })
+      })
+    })
+
+    const hasIntersections = Object.keys(intersections).length > 0
+    let heroesIds = []
+    if(hasIntersections){
+      heroesIds = Object.keys(intersections)
+    }else{
+      const allHeroes = heroesData.map( hero => Object.values(hero.worstHeroes))
+        .reduce( (arr, list ) => arr.concat(list) , [])
+      allHeroes.sort( (a,b) => b.advantage - a.advantage)
+      const topHeroes = new Set()
+      allHeroes.forEach( hero => {
+        const len = topHeroes.size
+        if( !topHeroes.has(hero.id) && len < 3){
+          topHeroes.add(hero.id)
+        }
+      })
+      heroesIds = Array.from(topHeroes.values())
+    }
+
+    const goodHeroes = await loadHeroesList(heroesIds)
+    const goodHeroesNames = goodHeroes.map( h => h.name )
+    agent.add(pickOne(translation[locale].bestHeroAnswer(goodHeroesNames)))
+  }
+
+  async function topHeroHandler(agent){
+
+    const allHeroesSnap = await db.ref('/heroes').once('value')
+    const allHeroes = allHeroesSnap.val()
+
+    const allHeroesData = Object.values(allHeroes)
+    allHeroesData.sort( (a,b) => a.rank - b.rank )
+
+    const topHeroes = allHeroesData.slice(0,3)
+    const topHeroesNames = topHeroes.map( h => h.name )
+    agent.add(`Os herois mais usados ultimamente são ${joinOr(topHeroesNames)}`)
+  }
+
+  // // Uncomment and edit to make your own intent handler
+  // // uncomment `intentMap.set('your intent name here', yourFunctionHandler);`
+  // // below to get this function to be run when a Dialogflow intent is matched
+  // function yourFunctionHandler(agent) {
+  //   agent.add(`This message is from Dialogflow's Cloud Functions for Firebase editor!`);
+  //   agent.add(new Card({
+  //       title: `Title: this is a card title`,
+  //       imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
+  //       text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
+  //       buttonText: 'This is a button',
+  //       buttonUrl: 'https://assistant.google.com/'
+  //     })
+  //   );
+  //   agent.add(new Suggestion(`Quick Reply`));
+  //   agent.add(new Suggestion(`Suggestion`));
+  //   agent.setContext({ name: 'weather', lifespan: 2, parameters: { city: 'Rome' }});
+  // }
+
+  // // Uncomment and edit to make your own Google Assistant intent handler
+  // // uncomment `intentMap.set('your intent name here', googleAssistantHandler);`
+  // // below to get this function to be run when a Dialogflow intent is matched
+  // function googleAssistantHandler(agent) {
+  //   let conv = agent.conv(); // Get Actions on Google library conv instance
+  //   conv.ask('Hello from the Actions on Google client library!') // Use Actions on Google library
+  //   agent.add(conv); // Add Actions on Google library responses to your agent's response
+  // }
+  // // See https://github.com/dialogflow/fulfillment-actions-library-nodejs
+  // // for a complete Dialogflow fulfillment library Actions on Google client library v2 integration sample
+
+  // Run the proper function handler based on the matched Dialogflow intent name
+  let intentMap = new Map();
+  intentMap.set('Default Welcome Intent', welcome);
+  intentMap.set('Default Fallback Intent', fallback);
+  intentMap.set('BestHero', bestHeroHandler);
+  intentMap.set('TopHero', topHeroHandler)
+  // intentMap.set('your intent name here', googleAssistantHandler);
+  agent.handleRequest(intentMap);
+});

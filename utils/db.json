@@ -1,0 +1,788 @@
+[
+  {
+    "value": "abaddon",
+    "synonyms": [
+      "Abaddon"
+    ]
+  },
+  {
+    "value": "alchemist",
+    "synonyms": [
+      "Alchemist"
+    ]
+  },
+  {
+    "value": "ancient-apparition",
+    "synonyms": [
+      "Ancient Apparition",
+      "Ancient",
+      "Apparition"
+    ]
+  },
+  {
+    "value": "anti-mage",
+    "synonyms": [
+      "Anti-Mage"
+    ]
+  },
+  {
+    "value": "arc-warden",
+    "synonyms": [
+      "Arc Warden",
+      "Arc",
+      "Warden"
+    ]
+  },
+  {
+    "value": "axe",
+    "synonyms": [
+      "Axe"
+    ]
+  },
+  {
+    "value": "bane",
+    "synonyms": [
+      "Bane"
+    ]
+  },
+  {
+    "value": "batrider",
+    "synonyms": [
+      "Batrider"
+    ]
+  },
+  {
+    "value": "beastmaster",
+    "synonyms": [
+      "Beastmaster"
+    ]
+  },
+  {
+    "value": "bloodseeker",
+    "synonyms": [
+      "Bloodseeker"
+    ]
+  },
+  {
+    "value": "bounty-hunter",
+    "synonyms": [
+      "Bounty Hunter",
+      "Bounty",
+      "Hunter"
+    ]
+  },
+  {
+    "value": "brewmaster",
+    "synonyms": [
+      "Brewmaster"
+    ]
+  },
+  {
+    "value": "bristleback",
+    "synonyms": [
+      "Bristleback"
+    ]
+  },
+  {
+    "value": "broodmother",
+    "synonyms": [
+      "Broodmother"
+    ]
+  },
+  {
+    "value": "centaur-warrunner",
+    "synonyms": [
+      "Centaur Warrunner",
+      "Centaur",
+      "Warrunner"
+    ]
+  },
+  {
+    "value": "chaos-knight",
+    "synonyms": [
+      "Chaos Knight",
+      "Chaos",
+      "Knight"
+    ]
+  },
+  {
+    "value": "chen",
+    "synonyms": [
+      "Chen"
+    ]
+  },
+  {
+    "value": "clinkz",
+    "synonyms": [
+      "Clinkz"
+    ]
+  },
+  {
+    "value": "clockwerk",
+    "synonyms": [
+      "Clockwerk"
+    ]
+  },
+  {
+    "value": "crystal-maiden",
+    "synonyms": [
+      "Crystal Maiden",
+      "Crystal",
+      "Maiden"
+    ]
+  },
+  {
+    "value": "dark-seer",
+    "synonyms": [
+      "Dark Seer",
+      "Dark",
+      "Seer"
+    ]
+  },
+  {
+    "value": "dark-willow",
+    "synonyms": [
+      "Dark Willow",
+      "Willow"
+    ]
+  },
+  {
+    "value": "dazzle",
+    "synonyms": [
+      "Dazzle"
+    ]
+  },
+  {
+    "value": "death-prophet",
+    "synonyms": [
+      "Death Prophet",
+      "Death",
+      "Prophet"
+    ]
+  },
+  {
+    "value": "disruptor",
+    "synonyms": [
+      "Disruptor"
+    ]
+  },
+  {
+    "value": "doom",
+    "synonyms": [
+      "Doom"
+    ]
+  },
+  {
+    "value": "dragon-knight",
+    "synonyms": [
+      "Dragon Knight",
+      "Dragon"
+    ]
+  },
+  {
+    "value": "drow-ranger",
+    "synonyms": [
+      "Drow Ranger",
+      "Drow",
+      "Ranger"
+    ]
+  },
+  {
+    "value": "earth-spirit",
+    "synonyms": [
+      "Earth Spirit",
+      "Earth",
+      "Spirit"
+    ]
+  },
+  {
+    "value": "earthshaker",
+    "synonyms": [
+      "Earthshaker"
+    ]
+  },
+  {
+    "value": "elder-titan",
+    "synonyms": [
+      "Elder Titan",
+      "Elder",
+      "Titan"
+    ]
+  },
+  {
+    "value": "ember-spirit",
+    "synonyms": [
+      "Ember Spirit",
+      "Ember"
+    ]
+  },
+  {
+    "value": "enchantress",
+    "synonyms": [
+      "Enchantress"
+    ]
+  },
+  {
+    "value": "enigma",
+    "synonyms": [
+      "Enigma"
+    ]
+  },
+  {
+    "value": "faceless-void",
+    "synonyms": [
+      "Faceless Void",
+      "Faceless",
+      "Void"
+    ]
+  },
+  {
+    "value": "grimstroke",
+    "synonyms": [
+      "Grimstroke"
+    ]
+  },
+  {
+    "value": "gyrocopter",
+    "synonyms": [
+      "Gyrocopter"
+    ]
+  },
+  {
+    "value": "huskar",
+    "synonyms": [
+      "Huskar"
+    ]
+  },
+  {
+    "value": "invoker",
+    "synonyms": [
+      "Invoker"
+    ]
+  },
+  {
+    "value": "io",
+    "synonyms": [
+      "Io"
+    ]
+  },
+  {
+    "value": "jakiro",
+    "synonyms": [
+      "Jakiro"
+    ]
+  },
+  {
+    "value": "juggernaut",
+    "synonyms": [
+      "Juggernaut"
+    ]
+  },
+  {
+    "value": "keeper-of-the-light",
+    "synonyms": [
+      "Keeper of the Light",
+      "Keeper",
+      "of",
+      "the",
+      "Light"
+    ]
+  },
+  {
+    "value": "kunkka",
+    "synonyms": [
+      "Kunkka"
+    ]
+  },
+  {
+    "value": "legion-commander",
+    "synonyms": [
+      "Legion Commander",
+      "Legion",
+      "Commander"
+    ]
+  },
+  {
+    "value": "leshrac",
+    "synonyms": [
+      "Leshrac"
+    ]
+  },
+  {
+    "value": "lich",
+    "synonyms": [
+      "Lich"
+    ]
+  },
+  {
+    "value": "lifestealer",
+    "synonyms": [
+      "Lifestealer"
+    ]
+  },
+  {
+    "value": "lina",
+    "synonyms": [
+      "Lina"
+    ]
+  },
+  {
+    "value": "lion",
+    "synonyms": [
+      "Lion"
+    ]
+  },
+  {
+    "value": "lone-druid",
+    "synonyms": [
+      "Lone Druid",
+      "Lone",
+      "Druid"
+    ]
+  },
+  {
+    "value": "luna",
+    "synonyms": [
+      "Luna"
+    ]
+  },
+  {
+    "value": "lycan",
+    "synonyms": [
+      "Lycan"
+    ]
+  },
+  {
+    "value": "magnus",
+    "synonyms": [
+      "Magnus"
+    ]
+  },
+  {
+    "value": "mars",
+    "synonyms": [
+      "Mars"
+    ]
+  },
+  {
+    "value": "medusa",
+    "synonyms": [
+      "Medusa"
+    ]
+  },
+  {
+    "value": "meepo",
+    "synonyms": [
+      "Meepo"
+    ]
+  },
+  {
+    "value": "mirana",
+    "synonyms": [
+      "Mirana"
+    ]
+  },
+  {
+    "value": "monkey-king",
+    "synonyms": [
+      "Monkey King",
+      "Monkey",
+      "King"
+    ]
+  },
+  {
+    "value": "morphling",
+    "synonyms": [
+      "Morphling"
+    ]
+  },
+  {
+    "value": "naga-siren",
+    "synonyms": [
+      "Naga Siren",
+      "Naga",
+      "Siren"
+    ]
+  },
+  {
+    "value": "natures-prophet",
+    "synonyms": [
+      "Nature's Prophet",
+      "Nature's"
+    ]
+  },
+  {
+    "value": "necrophos",
+    "synonyms": [
+      "Necrophos"
+    ]
+  },
+  {
+    "value": "night-stalker",
+    "synonyms": [
+      "Night Stalker",
+      "Night",
+      "Stalker"
+    ]
+  },
+  {
+    "value": "nyx-assassin",
+    "synonyms": [
+      "Nyx Assassin",
+      "Nyx",
+      "Assassin"
+    ]
+  },
+  {
+    "value": "ogre-magi",
+    "synonyms": [
+      "Ogre Magi",
+      "Ogre",
+      "Magi"
+    ]
+  },
+  {
+    "value": "omniknight",
+    "synonyms": [
+      "Omniknight"
+    ]
+  },
+  {
+    "value": "oracle",
+    "synonyms": [
+      "Oracle"
+    ]
+  },
+  {
+    "value": "outworld-devourer",
+    "synonyms": [
+      "Outworld Devourer",
+      "Outworld",
+      "Devourer"
+    ]
+  },
+  {
+    "value": "pangolier",
+    "synonyms": [
+      "Pangolier"
+    ]
+  },
+  {
+    "value": "phantom-assassin",
+    "synonyms": [
+      "Phantom Assassin",
+      "Phantom"
+    ]
+  },
+  {
+    "value": "phantom-lancer",
+    "synonyms": [
+      "Phantom Lancer",
+      "Lancer"
+    ]
+  },
+  {
+    "value": "phoenix",
+    "synonyms": [
+      "Phoenix"
+    ]
+  },
+  {
+    "value": "puck",
+    "synonyms": [
+      "Puck"
+    ]
+  },
+  {
+    "value": "pudge",
+    "synonyms": [
+      "Pudge"
+    ]
+  },
+  {
+    "value": "pugna",
+    "synonyms": [
+      "Pugna"
+    ]
+  },
+  {
+    "value": "queen-of-pain",
+    "synonyms": [
+      "Queen of Pain",
+      "Queen",
+      "Pain"
+    ]
+  },
+  {
+    "value": "razor",
+    "synonyms": [
+      "Razor"
+    ]
+  },
+  {
+    "value": "riki",
+    "synonyms": [
+      "Riki"
+    ]
+  },
+  {
+    "value": "rubick",
+    "synonyms": [
+      "Rubick"
+    ]
+  },
+  {
+    "value": "sand-king",
+    "synonyms": [
+      "Sand King",
+      "Sand"
+    ]
+  },
+  {
+    "value": "shadow-demon",
+    "synonyms": [
+      "Shadow Demon",
+      "Shadow",
+      "Demon"
+    ]
+  },
+  {
+    "value": "shadow-fiend",
+    "synonyms": [
+      "Shadow Fiend",
+      "Fiend"
+    ]
+  },
+  {
+    "value": "shadow-shaman",
+    "synonyms": [
+      "Shadow Shaman",
+      "Shaman"
+    ]
+  },
+  {
+    "value": "silencer",
+    "synonyms": [
+      "Silencer"
+    ]
+  },
+  {
+    "value": "skywrath-mage",
+    "synonyms": [
+      "Skywrath Mage",
+      "Skywrath",
+      "Mage"
+    ]
+  },
+  {
+    "value": "slardar",
+    "synonyms": [
+      "Slardar"
+    ]
+  },
+  {
+    "value": "slark",
+    "synonyms": [
+      "Slark"
+    ]
+  },
+  {
+    "value": "snapfire",
+    "synonyms": [
+      "Snapfire"
+    ]
+  },
+  {
+    "value": "sniper",
+    "synonyms": [
+      "Sniper"
+    ]
+  },
+  {
+    "value": "spectre",
+    "synonyms": [
+      "Spectre"
+    ]
+  },
+  {
+    "value": "spirit-breaker",
+    "synonyms": [
+      "Spirit Breaker",
+      "Breaker"
+    ]
+  },
+  {
+    "value": "storm-spirit",
+    "synonyms": [
+      "Storm Spirit",
+      "Storm"
+    ]
+  },
+  {
+    "value": "sven",
+    "synonyms": [
+      "Sven"
+    ]
+  },
+  {
+    "value": "techies",
+    "synonyms": [
+      "Techies"
+    ]
+  },
+  {
+    "value": "templar-assassin",
+    "synonyms": [
+      "Templar Assassin",
+      "Templar"
+    ]
+  },
+  {
+    "value": "terrorblade",
+    "synonyms": [
+      "Terrorblade"
+    ]
+  },
+  {
+    "value": "tidehunter",
+    "synonyms": [
+      "Tidehunter"
+    ]
+  },
+  {
+    "value": "timbersaw",
+    "synonyms": [
+      "Timbersaw"
+    ]
+  },
+  {
+    "value": "tinker",
+    "synonyms": [
+      "Tinker"
+    ]
+  },
+  {
+    "value": "tiny",
+    "synonyms": [
+      "Tiny"
+    ]
+  },
+  {
+    "value": "treant-protector",
+    "synonyms": [
+      "Treant Protector",
+      "Treant",
+      "Protector"
+    ]
+  },
+  {
+    "value": "troll-warlord",
+    "synonyms": [
+      "Troll Warlord",
+      "Troll",
+      "Warlord"
+    ]
+  },
+  {
+    "value": "tusk",
+    "synonyms": [
+      "Tusk"
+    ]
+  },
+  {
+    "value": "underlord",
+    "synonyms": [
+      "Underlord"
+    ]
+  },
+  {
+    "value": "undying",
+    "synonyms": [
+      "Undying"
+    ]
+  },
+  {
+    "value": "ursa",
+    "synonyms": [
+      "Ursa"
+    ]
+  },
+  {
+    "value": "vengeful-spirit",
+    "synonyms": [
+      "Vengeful Spirit",
+      "Vengeful"
+    ]
+  },
+  {
+    "value": "venomancer",
+    "synonyms": [
+      "Venomancer"
+    ]
+  },
+  {
+    "value": "viper",
+    "synonyms": [
+      "Viper"
+    ]
+  },
+  {
+    "value": "visage",
+    "synonyms": [
+      "Visage"
+    ]
+  },
+  {
+    "value": "void-spirit",
+    "synonyms": [
+      "Void Spirit"
+    ]
+  },
+  {
+    "value": "warlock",
+    "synonyms": [
+      "Warlock"
+    ]
+  },
+  {
+    "value": "weaver",
+    "synonyms": [
+      "Weaver"
+    ]
+  },
+  {
+    "value": "windranger",
+    "synonyms": [
+      "Windranger"
+    ]
+  },
+  {
+    "value": "winter-wyvern",
+    "synonyms": [
+      "Winter Wyvern",
+      "Winter",
+      "Wyvern"
+    ]
+  },
+  {
+    "value": "witch-doctor",
+    "synonyms": [
+      "Witch Doctor",
+      "Witch",
+      "Doctor"
+    ]
+  },
+  {
+    "value": "wraith-king",
+    "synonyms": [
+      "Wraith King",
+      "Wraith"
+    ]
+  },
+  {
+    "value": "zeus",
+    "synonyms": [
+      "Zeus"
+    ]
+  }
+]
