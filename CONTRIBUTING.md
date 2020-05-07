@@ -5,7 +5,7 @@
 1. [Create a GitHub account](https://help.github.com/articles/signing-up-for-a-new-github-account/) if you don't already have one.
 2. [Install and set up Git](https://help.github.com/articles/set-up-git/).
 
-## Forkign
+## Forking
 
 1. Create your own fork of the [gcloud-flutter-dota-app repository](https://github.com//alvarowolfx/gcloud-flutter-dota-app) by clicking "Fork" in the Web UI. During local development, this will be referred to by `git` as `origin`.
 
