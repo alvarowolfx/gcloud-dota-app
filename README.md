@@ -19,12 +19,14 @@ The live codings session happens in Portuguese (PT-BR) and you can follow on my 
 
 # Table of Contents
 
+- [Dota 2 App using Flutter, Firebase and Google Cloud](#dota-2-app-using-flutter-firebase-and-google-cloud)
+- [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
   - [Node Setup](#node-setup)
   - [Firebase Setup](#firebase-setup)
-  - [Google Cloud Setup](#google-cloud-tools-and-project)
-  - [Flutter Setup](#google-cloud-tools-and-project)
-  - [Building & Running](#building-&-running-the-project)
+  - [Google Cloud Tools and Project](#google-cloud-tools-and-project)
+  - [Flutter Setup](#flutter-setup)
+  - [Building & Running the project](#building--running-the-project)
 
 # Getting Started
 
@@ -48,12 +50,6 @@ npm install -g firebase-tools
 
 ```shell
 firebase login
-```
-
-* Test that the CLI is properly installed and accessing your account by listing your Firebase projects. Run the following command:
-
-```shell
-firebase projects:list
 ```
 
 * Test that the CLI is properly installed and accessing your account by listing your Firebase projects. Run the following command:
