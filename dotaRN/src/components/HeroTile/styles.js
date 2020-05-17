@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
+import FastImage from 'react-native-fast-image';
 
-export const Container = styled.View`
-  background-color: #f44542;
+export const Container = styled.TouchableHighlight`
   margin-vertical: 4px;
   margin-horizontal: 4px;
   flex-grow: 1;
@@ -29,7 +29,7 @@ export const Name = styled.Text`
   margin-bottom: 5px;
 `;
 
-export const Image = styled.ImageBackground`
+export const Image = styled(FastImage)`
   height: 100%;
   width: 100%;
 `;

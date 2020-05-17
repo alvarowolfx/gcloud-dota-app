@@ -1,34 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import database from '@react-native-firebase/database';
 import * as Styled from './styles';
 
 import HeroTile from '../../components/HeroTile';
 
-const Heroes = () => {
+const reference = database().ref('/heroes');
+
+const Heroes = (props) => {
+  const [heroes, setHeroes] = useState([]);
+  const [order, setOrder] = useState('name');
+
+  const orderHeroes = (heroesArray, orderBy) => {
+    if (orderBy === 'rank') {
+      const heroesSorted = heroesArray.sort((a, b) => {
+        return a.rank - b.rank;
+      });
+
+      setHeroes(heroesSorted);
+    } else {
+      const heroesSorted = heroesArray.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+
+      setHeroes(heroesSorted);
+    }
+  };
+
+  const handleOrder = (heroesArray, orderBy) => {
+    setOrder(orderBy);
+    orderHeroes(heroesArray, orderBy);
+  };
+
+  useEffect(() => {
+    const subscriber = reference.on('value', (snapshot) => {
+      const heroesData = snapshot.toJSON();
+      const heroesArray = [];
+      for (let hero in heroesData) {
+        heroesArray.push(heroesData[hero]);
+      }
+
+      if (heroesArray.length) {
+        console.log(heroesArray.length);
+        orderHeroes(heroesArray, order);
+      }
+    });
+    return () => subscriber();
+  }, []);
+
+  useEffect(() => {
+    props.navigation.setOptions({
+      headerRight: () => (
+        <Styled.OrderHeroes
+          onPress={() => {
+            handleOrder(heroes, order === 'name' ? 'rank' : 'name');
+          }}>
+          <Styled.Icon name={order === 'name' ? 'sort-by-alpha' : 'sort'} />
+        </Styled.OrderHeroes>
+      ),
+    });
+  }, [order, heroes]);
+
   return (
     <Styled.Container>
       <Styled.List
-        data={[
-          {
-            id: 1,
-            name: 'Sniper',
-            imageUrl:
-              'https://ot.dotabuff.com/assets/heroes/sniper-a61d181a901744790171f6c73346f4051a3411d82b4a62a8f6ce272ae16c7dcd.jpg',
-          },
-          {
-            id: 2,
-            name: 'Axe',
-            imageUrl:
-              'https://ot.dotabuff.com/assets/heroes/axe-7611ab64404e0b1f6d798baa713a76ab94ac4df59273e2586b9dec447a85e0c7.jpg',
-          },
-          {
-            id: 3,
-            name: 'Riki',
-            imageUrl:
-              'https://ot.dotabuff.com/assets/heroes/riki-a4acbf9efccf572585947a2a1ab7b3ff1449cca6eda05d58fec21afb4f713896.jpg',
-          },
-        ]}
+        data={heroes}
         keyExtractor={({ id }) => String(id)}
-        renderItem={({ item }) => <HeroTile hero={item} />}
+        renderItem={({ item }) => <HeroTile hero={item} {...props} />}
       />
     </Styled.Container>
   );
