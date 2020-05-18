@@ -60,7 +60,7 @@ const hero = (props) => {
         </Styled.BaseContainer>
         <Styled.BaseContainer>
           <Styled.Strong>WinRate:</Styled.Strong>
-          <Styled.Text>{`${hero.winRate}%`}</Styled.Text>
+          <Styled.Text>{`${hero.winRate.toFixed(2)}%`}</Styled.Text>
         </Styled.BaseContainer>
       </Styled.Stats>
       <Styled.List
@@ -72,7 +72,7 @@ const hero = (props) => {
               <Styled.Text color="#585858" size="16">{item.name}</Styled.Text>
               <Styled.Text color="#999999" size="14">{item.matches} Matches</Styled.Text>
             </Styled.ItemStat>
-            <Styled.Text color="#585858">{item.winRate}%</Styled.Text>
+            <Styled.Text color="#585858">{item.winRate.toFixed(2)}%</Styled.Text>
           </Styled.Item>
         )}
         renderSectionHeader={({ section: { title } }) => (

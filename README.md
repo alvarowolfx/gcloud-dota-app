@@ -1,4 +1,4 @@
-# Dota 2 App using Flutter, Firebase and Google Cloud
+# Dota 2 App using (Flutter or React Native), Firebase and Google Cloud
 
 This is a pet project that born with the idea of having a nice subject to go through some Live Coding sessions. We are getting data from [DotaBuff](https://dotabuff.com) website to have more info about the heroes and latest matches.
 
@@ -19,13 +19,13 @@ The live codings session happens in Portuguese (PT-BR) and you can follow on my 
 
 # Table of Contents
 
-- [Dota 2 App using Flutter, Firebase and Google Cloud](#dota-2-app-using-flutter-firebase-and-google-cloud)
+- [Dota 2 App using (Flutter or React Native), Firebase and Google Cloud](#dota-2-app-using-flutter-or-react-native-firebase-and-google-cloud)
 - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
   - [Node Setup](#node-setup)
   - [Firebase Setup](#firebase-setup)
   - [Google Cloud Tools and Project](#google-cloud-tools-and-project)
-  - [Flutter Setup](#flutter-setup)
+  - [Mobile Setup](#mobile-setup)
   - [Building & Running the project](#building--running-the-project)
 
 # Getting Started
@@ -70,7 +70,9 @@ firebase projects:list
 * Set current project
     * `firebase use YOUR_PROJECT_NAME`
 
-## Flutter Setup
+## Mobile Setup
+
+> Flutter Option
 
 * Follow the guide on their [website](https://flutter.dev/docs/get-started/install).
 * Run the following command to make sure it's all good.
@@ -78,9 +80,24 @@ firebase projects:list
 flutter doctor
 ```
 
+> React Native Option
+* Follow the guide on their [website](https://reactnative.dev/docs/environment-setup).
+* Run the following command to make sure it's all good.
+```shell
+npx react-native doctor
+```
+
+
+
 ## Building & Running the project
 
 * Make sure you have the latest packages (after you pull): `npm install`
 * Deploy all the function from the `functions` directory.
   * There are deploy scripts on the `package.json` file.
+
+> Flutter
 * To run the app, run `flutter run` on the `dota_app` folder
+
+> React Native
+* Install dependencies of `package.json` on `dotaRN` folder (npm install).
+* To run the app, run `npx react-native run-android` or `npx react-native run-ios` on the `dotaRN` folder.
