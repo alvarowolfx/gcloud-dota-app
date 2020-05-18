@@ -10,7 +10,7 @@ export const TileContainer = styled.View`
   height: 160px;
 `;
 
-export const List = styled.FlatList``;
+export const List = styled.SectionList``;
 
 export const Overlay = styled(LinearGradient).attrs({
   start: { x: 0.0, y: 0.7 },
@@ -44,8 +44,8 @@ export const Stats = styled.View`
 `;
 
 export const Text = styled.Text`
-  color: #ffffff;
-  font-size: 15px;
+  color: ${({ color }) => (color ? color : '#ffffff')};
+  font-size: ${({ size }) => (size ? `${size}px` : '15px')};
 `;
 
 export const Strong = styled(Text)`
@@ -55,4 +55,22 @@ export const Strong = styled(Text)`
 
 export const BaseContainer = styled.View`
   flex-direction: row;
+`;
+
+export const Item = styled.View`
+  padding: 10px 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ItemStat = styled.View``;
+
+export const Matched = styled(Text)`
+  color: #cccccc;
+`;
+
+export const SectionTitle = styled.View`
+  background: #f59f98;
+  padding: 10px;
 `;
