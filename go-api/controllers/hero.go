@@ -32,8 +32,26 @@ func GetHeroesRecommendations(c *fiber.Ctx) {
 		c.Status(400).JSON(map[string]string{"message": "Missing enemies query parameter"})
 		return
 	}
-
 	enemiesIds := strings.Split(enemies, ",")
+
+	if len(enemiesIds) > 5 {
+		c.Status(400).JSON(map[string]string{"message": "Max number of enemies"})
+		return
+	}
+
+	team := c.Query("team")
+	teamIds := strings.Split(team, ",")
+
+	if len(teamIds) > 5 {
+		c.Status(400).JSON(map[string]string{"message": "Max number of team heroes. Max "})
+		return
+	}
+
+	teamMap := map[string]bool{}
+	for _, teamID := range teamIds {
+		teamMap[teamID] = true
+	}
+
 	enemyHeroes, err := model.LoadHeroesList(enemiesIds)
 	if err != nil {
 		c.Status(500).JSON(map[string]string{"message": err.Error()})
@@ -56,9 +74,10 @@ func GetHeroesRecommendations(c *fiber.Ctx) {
 				if _, ok := enemyMap[key]; ok {
 					continue
 				}
-				hero, ok := enemyB.WorstHeroes[key]
-				if ok {
-					intersections[key] = hero
+				if hero, ok := enemyB.WorstHeroes[key]; ok {
+					if _, isOnMyTeam := teamMap[key]; !isOnMyTeam {
+						intersections[key] = hero
+					}
 				}
 			}
 		}
@@ -76,7 +95,9 @@ func GetHeroesRecommendations(c *fiber.Ctx) {
 		var allHeroes []model.DotaHeroVersus
 		for _, enemy := range enemyHeroes {
 			for _, hero := range enemy.WorstHeroes {
-				allHeroes = append(allHeroes, hero)
+				if _, isOnMyTeam := teamMap[hero.ID]; !isOnMyTeam {
+					allHeroes = append(allHeroes, hero)
+				}
 			}
 		}
 		sort.Sort(model.ByDotaHeroVersusAdvantage(allHeroes))
