@@ -10,6 +10,8 @@ import (
 	"github.com/gofiber/fiber"
 )
 
+const MaxHeroesRecommended = 3
+
 func GetHeroById(c *fiber.Ctx) {
 	heroID := c.Params("heroId")
 	ctx := context.Background()
@@ -43,7 +45,7 @@ func GetHeroesRecommendations(c *fiber.Ctx) {
 	teamIds := strings.Split(team, ",")
 
 	if len(teamIds) > 5 {
-		c.Status(400).JSON(map[string]string{"message": "Max number of team heroes. Max "})
+		c.Status(400).JSON(map[string]string{"message": "Max number of team heroes."})
 		return
 	}
 
@@ -83,29 +85,35 @@ func GetHeroesRecommendations(c *fiber.Ctx) {
 		}
 	}
 
-	var heroesIds []string
-	if len(intersections) > 0 {
-		heroesIds = make([]string, len(intersections))
-		i := 0
+	heroesIds := make([]string, 3)
+	currentHeroIndex := 0
+	intersectCount := len(intersections)
+	if intersectCount > 0 {
 		for heroID := range intersections {
-			heroesIds[i] = heroID
-			i++
+			heroesIds[currentHeroIndex] = heroID
+			currentHeroIndex++
 		}
-	} else {
+	}
+
+	if intersectCount < MaxHeroesRecommended {
+		missingHeroes := MaxHeroesRecommended - intersectCount
 		var allHeroes []model.DotaHeroVersus
 		for _, enemy := range enemyHeroes {
 			for _, hero := range enemy.WorstHeroes {
-				if _, isOnMyTeam := teamMap[hero.ID]; !isOnMyTeam {
+				_, isOnMyTeam := teamMap[hero.ID]
+				_, isOnIntersection := intersections[hero.ID]
+				if !isOnMyTeam && !isOnIntersection {
 					allHeroes = append(allHeroes, hero)
 				}
 			}
 		}
 		sort.Sort(model.ByDotaHeroVersusAdvantage(allHeroes))
 		cache := map[string]bool{}
-		for _, hero := range allHeroes[0:3] {
+		for _, hero := range allHeroes[0:missingHeroes] {
 			if _, ok := cache[hero.ID]; !ok {
-				heroesIds = append(heroesIds, hero.ID)
+				heroesIds[currentHeroIndex] = hero.ID
 				cache[hero.ID] = true
+				currentHeroIndex++
 			}
 		}
 	}
