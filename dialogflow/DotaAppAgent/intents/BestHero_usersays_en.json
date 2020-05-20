@@ -1,0 +1,151 @@
+[
+  {
+    "id": "d0e02096-e7c7-4311-b8de-b764a9c1ed77",
+    "data": [
+      {
+        "text": "what should I pick against ",
+        "userDefined": false
+      },
+      {
+        "text": "Enigma",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": " ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "31c0f717-e819-4493-bfef-5e652c1804ee",
+    "data": [
+      {
+        "text": "Their team got ",
+        "userDefined": false
+      },
+      {
+        "text": "Enchantress",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": ", ",
+        "userDefined": false
+      },
+      {
+        "text": "Huskar",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "Invoker",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": ", which hero is a good counter?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "b6e9de48-5145-4c47-80db-5d3134db5f61",
+    "data": [
+      {
+        "text": "Hmmm, ",
+        "userDefined": false
+      },
+      {
+        "text": "the",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " other team just picked ",
+        "userDefined": false
+      },
+      {
+        "text": "Beastmaster",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": ", what should I pick?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ab43d6f8-6f38-40ca-a701-b8c9c889a8b8",
+    "data": [
+      {
+        "text": "They picked ",
+        "userDefined": false
+      },
+      {
+        "text": "Abaddon",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "Dragon Knight",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": ", which hero should I pick?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a380014a-d59a-4151-bbb6-f04f0026a0fd",
+    "data": [
+      {
+        "text": "Which hero is good against ",
+        "userDefined": false
+      },
+      {
+        "text": "Drown Ranger",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": true
+      },
+      {
+        "text": " ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

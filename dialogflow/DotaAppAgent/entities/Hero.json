@@ -1,0 +1,9 @@
+{
+  "id": "3a74d25c-48e5-4bb0-81bf-350926d6c157",
+  "name": "Hero",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

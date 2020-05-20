@@ -1,0 +1,51 @@
+[
+  {
+    "id": "4393a99b-536d-42c1-b86d-f4d4a989b26e",
+    "data": [
+      {
+        "text": "Valeu, falou",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ae8fdbbe-be10-4404-8366-978fae2d1c9a",
+    "data": [
+      {
+        "text": "Falou",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8b3d72eb-7750-4113-bd28-5d94fa16c9dc",
+    "data": [
+      {
+        "text": "Valeu",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "9e06ca5f-72a9-4ec3-8e1a-3c17bdac2a12",
+    "data": [
+      {
+        "text": "Ok, obrigado",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

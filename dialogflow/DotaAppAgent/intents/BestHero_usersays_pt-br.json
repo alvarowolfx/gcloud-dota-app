@@ -1,0 +1,120 @@
+[
+  {
+    "id": "fcb9b5d5-1bd5-474a-b363-3c8af4352b7f",
+    "data": [
+      {
+        "text": "Que heroi pego contra a ",
+        "userDefined": false
+      },
+      {
+        "text": "Drow",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": " ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "472bf042-007a-4530-ace4-7abee26e69c3",
+    "data": [
+      {
+        "text": "Qual herói é bom contra a ",
+        "userDefined": false
+      },
+      {
+        "text": "Aranha",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": " e o ",
+        "userDefined": false
+      },
+      {
+        "text": "Death Knight",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": " ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "0e187fc5-961c-490a-bf77-feaacdc7a461",
+    "data": [
+      {
+        "text": "O outro time pegou ",
+        "userDefined": false
+      },
+      {
+        "text": "Windranger",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": ", ",
+        "userDefined": false
+      },
+      {
+        "text": "Huskar",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": " e o ",
+        "userDefined": false
+      },
+      {
+        "text": "Pudge",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": ", o que pegar ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "68f02e8d-d944-4ff9-82b5-15a03d3a9c4b",
+    "data": [
+      {
+        "text": "O inimigo pegou a ",
+        "userDefined": false
+      },
+      {
+        "text": "Drow",
+        "alias": "heroes",
+        "meta": "@Hero",
+        "userDefined": false
+      },
+      {
+        "text": ", o que eu pego ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

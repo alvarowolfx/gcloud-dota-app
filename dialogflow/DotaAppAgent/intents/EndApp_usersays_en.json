@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ac2cc7bf-5988-4771-9557-6a09afc19a56",
+    "data": [
+      {
+        "text": "See ya",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ce17bd47-a571-4fc5-a07e-60619ad6edfd",
+    "data": [
+      {
+        "text": "Bye bye",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "9997a7bf-c33f-402a-9ac2-b9b178876744",
+    "data": [
+      {
+        "text": "Ok, thanks",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

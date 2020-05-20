@@ -1,0 +1,38 @@
+[
+  {
+    "id": "56facd36-666a-4147-9710-985d3223e74d",
+    "data": [
+      {
+        "text": "Que heroi que a galera anda pegando ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "cc26e6d8-1c8b-4421-add8-2278d06545ef",
+    "data": [
+      {
+        "text": "Qual heroi tá em alta ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "2417f11f-0aec-4840-8ea1-23f3c0f46207",
+    "data": [
+      {
+        "text": "Quais herois estão sendo mais usados ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

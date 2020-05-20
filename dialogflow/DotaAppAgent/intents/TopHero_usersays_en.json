@@ -1,0 +1,56 @@
+[
+  {
+    "id": "182f2d32-272a-4fbb-adee-e25d00332770",
+    "data": [
+      {
+        "text": "which heroes are on ",
+        "userDefined": false
+      },
+      {
+        "text": "the",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " top rank ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8af7e942-d130-4934-a822-181d1b37e52f",
+    "data": [
+      {
+        "text": "what are ",
+        "userDefined": false
+      },
+      {
+        "text": "the",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " top rank heroes ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f0306436-6a70-46a6-bc44-8ae1465766bc",
+    "data": [
+      {
+        "text": "which heroes people have been using ?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 0
+  }
+]

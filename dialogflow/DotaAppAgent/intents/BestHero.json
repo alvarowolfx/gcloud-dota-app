@@ -1,0 +1,54 @@
+{
+  "id": "614bb79a-0586-4eee-b0f6-46f21a8834ac",
+  "name": "BestHero",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "affd899d-ee0d-4a6d-9fab-8df28ed1da95",
+          "required": true,
+          "dataType": "@Hero",
+          "name": "heroes",
+          "value": "$heroes",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Which hero they got ?"
+            },
+            {
+              "lang": "en",
+              "value": "Which hero ?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "pt-br",
+          "condition": "",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}
