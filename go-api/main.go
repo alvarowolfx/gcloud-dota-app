@@ -6,10 +6,10 @@ import (
 
 	"com.aviebrantz.dota.api/controllers"
 	"com.aviebrantz.dota.api/database"
+	"com.aviebrantz.dota.api/logger"
 	"com.aviebrantz.dota.api/model"
 	"github.com/gofiber/cors"
 	"github.com/gofiber/fiber"
-	"github.com/gofiber/logger"
 	"github.com/gofiber/recover"
 	"github.com/joho/godotenv"
 )
@@ -32,7 +32,7 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New())
-	app.Use(logger.New())
+	app.Use(logger.NewZapLogger())
 	cfg := recover.Config{
 		Handler: func(c *fiber.Ctx, err error) {
 			c.Status(500).JSON(fiber.Map{"message": err.Error()})
