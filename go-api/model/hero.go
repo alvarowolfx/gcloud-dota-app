@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"com.aviebrantz.dota.api/database"
+	"firebase.google.com/go/db"
 )
 
 type DotaHeroVersus struct {
@@ -39,10 +39,29 @@ func (s ByDotaHeroVersusAdvantage) Less(i, j int) bool {
 	return s[i].Advantage > s[j].Advantage
 }
 
-func LoadHeroesList(ids []string) ([]DotaHero, error) {
-	var heroes []DotaHero
+type HeroRepository interface {
+	FindById(ctx context.Context, id string) (*DotaHero, error)
+	LoadHeroesList(ids []string) ([]DotaHero, error)
+}
 
-	heroesRef := database.FirebaseDB.NewRef("/heroes")
+type FirebaseHeroRepository struct {
+	FirebaseDB *db.Client
+}
+
+func NewFirebaseHeroRepository(firebaseDB *db.Client) HeroRepository {
+	return &FirebaseHeroRepository{
+		FirebaseDB: firebaseDB,
+	}
+}
+
+func (fhr *FirebaseHeroRepository) FindById(ctx context.Context, id string) (*DotaHero, error) {
+	hero := &DotaHero{}
+	err := fhr.FirebaseDB.NewRef("/heroes").Child(id).Get(ctx, hero)
+	return hero, err
+}
+
+func (fhr *FirebaseHeroRepository) LoadHeroesList(ids []string) ([]DotaHero, error) {
+	var heroes []DotaHero
 
 	ctx, cancel := context.WithCancel(context.Background())
 	var wg sync.WaitGroup
@@ -53,11 +72,10 @@ func LoadHeroesList(ids []string) ([]DotaHero, error) {
 		wg.Add(1)
 		go func(id string, wg *sync.WaitGroup) {
 			defer wg.Done()
-			var hero DotaHero
-			err := heroesRef.Child(id).Get(ctx, &hero)
+			hero, err := fhr.FindById(ctx, id)
 			if err == nil {
 				mutex.Lock()
-				heroes = append(heroes, hero)
+				heroes = append(heroes, *hero)
 				mutex.Unlock()
 			}
 		}(id, &wg)

@@ -5,18 +5,26 @@ import (
 	"sort"
 	"strings"
 
-	"com.aviebrantz.dota.api/database"
 	"com.aviebrantz.dota.api/model"
 	"github.com/gofiber/fiber"
 )
 
 const MaxHeroesRecommended = 3
 
-func GetHeroById(c *fiber.Ctx) {
+type HeroController struct {
+	HeroRepository model.HeroRepository
+}
+
+func NewHeroController(heroRepository model.HeroRepository) *HeroController {
+	return &HeroController{
+		HeroRepository: heroRepository,
+	}
+}
+
+func (hr *HeroController) GetHeroById(c *fiber.Ctx) {
 	heroID := c.Params("heroId")
 	ctx := context.Background()
-	hero := &model.DotaHero{}
-	err := database.FirebaseDB.NewRef("/heroes").Child(heroID).Get(ctx, hero)
+	hero, err := hr.HeroRepository.FindById(ctx, heroID)
 	if err != nil {
 		c.Status(500).JSON(map[string]string{"message": "Internal error to fetch data"})
 		return
@@ -28,7 +36,7 @@ func GetHeroById(c *fiber.Ctx) {
 	c.Status(200).JSON(hero)
 }
 
-func GetHeroesRecommendations(c *fiber.Ctx) {
+func (hr *HeroController) GetHeroesRecommendations(c *fiber.Ctx) {
 	enemies := c.Query("enemies")
 	if enemies == "" {
 		c.Status(400).JSON(map[string]string{"message": "Missing enemies query parameter"})
@@ -49,15 +57,37 @@ func GetHeroesRecommendations(c *fiber.Ctx) {
 		return
 	}
 
+	heroesIds, err := hr.getRecommendations(enemiesIds, teamIds)
+	if err != nil {
+		c.Status(500).JSON(map[string]string{"message": err.Error()})
+		return
+	}
+
+	finalHeroes, err := hr.HeroRepository.LoadHeroesList(heroesIds)
+	if err != nil {
+		c.Status(500).JSON(map[string]string{"message": err.Error()})
+		return
+	}
+
+	finalHeroesMap := map[string]model.DotaHero{}
+	for _, hero := range finalHeroes {
+		hero.BestHeroes = nil
+		hero.WorstHeroes = nil
+		finalHeroesMap[hero.ID] = hero
+	}
+
+	c.Status(200).JSON(finalHeroesMap)
+}
+
+func (hc *HeroController) getRecommendations(enemiesIds, teamIds []string) ([]string, error) {
 	teamMap := map[string]bool{}
 	for _, teamID := range teamIds {
 		teamMap[teamID] = true
 	}
 
-	enemyHeroes, err := model.LoadHeroesList(enemiesIds)
+	enemyHeroes, err := hc.HeroRepository.LoadHeroesList(enemiesIds)
 	if err != nil {
-		c.Status(500).JSON(map[string]string{"message": err.Error()})
-		return
+		return nil, err
 	}
 
 	intersections := make(map[string]model.DotaHeroVersus)
@@ -117,19 +147,5 @@ func GetHeroesRecommendations(c *fiber.Ctx) {
 			}
 		}
 	}
-
-	finalHeroes, err := model.LoadHeroesList(heroesIds)
-	if err != nil {
-		c.Status(500).JSON(map[string]string{"message": err.Error()})
-		return
-	}
-
-	finalHeroesMap := map[string]model.DotaHero{}
-	for _, hero := range finalHeroes {
-		hero.BestHeroes = nil
-		hero.WorstHeroes = nil
-		finalHeroesMap[hero.ID] = hero
-	}
-
-	c.Status(200).JSON(finalHeroesMap)
+	return heroesIds, nil
 }

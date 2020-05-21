@@ -6,6 +6,7 @@ import (
 
 	"com.aviebrantz.dota.api/controllers"
 	"com.aviebrantz.dota.api/database"
+	"com.aviebrantz.dota.api/model"
 	"github.com/gofiber/cors"
 	"github.com/gofiber/fiber"
 	"github.com/gofiber/logger"
@@ -24,7 +25,9 @@ func main() {
 		port = envPort
 	}
 
-	database.Connect()
+	firebaseDB := database.Connect()
+	heroRepository := model.NewFirebaseHeroRepository(firebaseDB)
+	heroController := controllers.NewHeroController(heroRepository)
 
 	app := fiber.New()
 
@@ -41,8 +44,8 @@ func main() {
 		c.Send("Olá Twitch.tv!")
 	})
 
-	app.Get("/hero/:heroId", controllers.GetHeroById)
-	app.Get("/recommendation", controllers.GetHeroesRecommendations)
+	app.Get("/hero/:heroId", heroController.GetHeroById)
+	app.Get("/recommendation", heroController.GetHeroesRecommendations)
 
 	app.Listen(port)
 }
