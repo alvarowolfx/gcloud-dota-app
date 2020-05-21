@@ -53,7 +53,7 @@ func (hr *HeroController) GetHeroesRecommendations(c *fiber.Ctx) {
 	teamIds := strings.Split(team, ",")
 
 	if len(teamIds) > 5 {
-		c.Status(400).JSON(map[string]string{"message": "Max number of team heroes."})
+		c.Status(400).JSON(map[string]string{"message": "Max number of team heroes"})
 		return
 	}
 
@@ -107,7 +107,8 @@ func (hc *HeroController) getRecommendations(enemiesIds, teamIds []string) ([]st
 					continue
 				}
 				if hero, ok := enemyB.WorstHeroes[key]; ok {
-					if _, isOnMyTeam := teamMap[key]; !isOnMyTeam {
+					_, isOnMyTeam := teamMap[key]
+					if !isOnMyTeam {
 						intersections[key] = hero
 					}
 				}
@@ -115,13 +116,11 @@ func (hc *HeroController) getRecommendations(enemiesIds, teamIds []string) ([]st
 		}
 	}
 
-	heroesIds := make([]string, 3)
-	currentHeroIndex := 0
+	var heroesIds []string
 	intersectCount := len(intersections)
 	if intersectCount > 0 {
 		for heroID := range intersections {
-			heroesIds[currentHeroIndex] = heroID
-			currentHeroIndex++
+			heroesIds = append(heroesIds, heroID)
 		}
 	}
 
@@ -131,19 +130,26 @@ func (hc *HeroController) getRecommendations(enemiesIds, teamIds []string) ([]st
 		for _, enemy := range enemyHeroes {
 			for _, hero := range enemy.WorstHeroes {
 				_, isOnMyTeam := teamMap[hero.ID]
+				_, isOnEnemyTeam := enemyMap[hero.ID]
 				_, isOnIntersection := intersections[hero.ID]
-				if !isOnMyTeam && !isOnIntersection {
+				if !isOnMyTeam && !isOnIntersection && !isOnEnemyTeam {
 					allHeroes = append(allHeroes, hero)
 				}
 			}
 		}
-		sort.Sort(model.ByDotaHeroVersusAdvantage(allHeroes))
-		cache := map[string]bool{}
-		for _, hero := range allHeroes[0:missingHeroes] {
-			if _, ok := cache[hero.ID]; !ok {
-				heroesIds[currentHeroIndex] = hero.ID
-				cache[hero.ID] = true
-				currentHeroIndex++
+		allHeroesLen := len(allHeroes)
+		if allHeroesLen > 0 {
+			sort.Sort(model.ByDotaHeroVersusAdvantage(allHeroes))
+			cache := map[string]bool{}
+			min := missingHeroes
+			if allHeroesLen < missingHeroes {
+				min = allHeroesLen
+			}
+			for _, hero := range allHeroes[0:min] {
+				if _, ok := cache[hero.ID]; !ok {
+					heroesIds = append(heroesIds, hero.ID)
+					cache[hero.ID] = true
+				}
 			}
 		}
 	}
