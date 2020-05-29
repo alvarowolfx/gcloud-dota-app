@@ -23,7 +23,7 @@ The live codings session happens in Portuguese (PT-BR) and you can follow on my 
 
 ## Outstanding External Collaborators
 
-- [@omurilo](https://github.com/omurilo) Created a version of the mobile using React Native - [Link](https://twitter.com/alvaroviebrantz/status/1258213959787786246?s=20gcloud-react-native-dota-app)
+- [@omurilo](https://github.com/omurilo) Created a version of the mobile using React Native - [Link](https://github.com/omurilo/gcloud-react-native-dota-app)
 
 ## Table of Contents
 
