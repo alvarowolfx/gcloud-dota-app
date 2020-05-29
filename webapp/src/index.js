@@ -3,16 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
+import {
+  RecoilRoot
+} from 'recoil'
+
+import "firebase/database"
+import * as firebase from "firebase/app"
 
 import theme from './theme'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const firebaseConfig = require('./firebase-config.json')
+firebase.initializeApp(firebaseConfig)
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

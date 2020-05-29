@@ -7,7 +7,10 @@ import { BrowserRouter as Router,} from 'react-router-dom'
 import Routes from './Routes'
 import Header from './components/Header'
 
+import { useHeroesList } from './atoms/heroes'
+
 function App() {
+  useHeroesList()
   return (
     <Container>
       <Router>
