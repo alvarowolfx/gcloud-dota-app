@@ -20,10 +20,12 @@ func main() {
 		log.Println("Error loading .env file")
 	}
 
-	port := "3000"
+	port := "8000"
 	if envPort := os.Getenv("PORT"); envPort != "" {
 		port = envPort
 	}
+
+	log.Println(port)
 
 	firebaseDB := database.Connect()
 	heroRepository := model.NewFirebaseHeroRepository(firebaseDB)
@@ -47,5 +49,8 @@ func main() {
 	app.Get("/hero/:heroId", heroController.GetHeroById)
 	app.Get("/recommendation", heroController.GetHeroesRecommendations)
 
-	app.Listen(port)
+	err = app.Listen(port)
+	if err != nil {
+		log.Fatalf("error initializing app: %v\n", err)
+	}
 }

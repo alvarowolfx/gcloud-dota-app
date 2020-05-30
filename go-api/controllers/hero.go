@@ -2,22 +2,31 @@ package controllers
 
 import (
 	"context"
+	"os"
 	"sort"
+	"strconv"
 	"strings"
 
 	"com.aviebrantz.dota.api/model"
 	"github.com/gofiber/fiber"
 )
 
-const MaxHeroesRecommended = 3
-
 type HeroController struct {
-	HeroRepository model.HeroRepository
+	HeroRepository       model.HeroRepository
+	maxHeroesRecommended int
 }
 
 func NewHeroController(heroRepository model.HeroRepository) *HeroController {
+	maxHeroesRecommended := 5
+	if envMaxHeroesRecommended := os.Getenv("MAX_HEROES_RECOMMENDED"); envMaxHeroesRecommended != "" {
+		v, err := strconv.Atoi(envMaxHeroesRecommended)
+		if err == nil {
+			maxHeroesRecommended = v
+		}
+	}
 	return &HeroController{
-		HeroRepository: heroRepository,
+		HeroRepository:       heroRepository,
+		maxHeroesRecommended: maxHeroesRecommended,
 	}
 }
 
@@ -124,8 +133,8 @@ func (hc *HeroController) getRecommendations(enemiesIds, teamIds []string) ([]st
 		}
 	}
 
-	if intersectCount < MaxHeroesRecommended {
-		missingHeroes := MaxHeroesRecommended - intersectCount
+	if intersectCount < hc.maxHeroesRecommended {
+		missingHeroes := hc.maxHeroesRecommended - intersectCount
 		var allHeroes []model.DotaHeroVersus
 		for _, enemy := range enemyHeroes {
 			for _, hero := range enemy.WorstHeroes {
