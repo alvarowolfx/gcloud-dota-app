@@ -1,32 +1,30 @@
 import React from 'react'
 
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue  } from 'recoil'
 import { heroesState } from '../atoms/heroes'
 import {
-  addEnemyHeroSelector,
-  removeEnemyHeroSelector,
-  addTeamHeroSelector,
-  removeTeamHeroSelector,
+  useTeamBuilderActions,
+  useRecommendedHeroes,
   availableHeroesIdsSelector,
   enemyHeroesSelector,
   teamHeroesSelector,
 } from '../atoms/builder'
 
 export default function TeamBuilder(){
-  const addEnemyHero = useSetRecoilState(addEnemyHeroSelector)
-  const removeEnemyHero = useSetRecoilState(removeEnemyHeroSelector)
-  const addTeamHero = useSetRecoilState(addTeamHeroSelector)
-  const removeTeamHero = useSetRecoilState(removeTeamHeroSelector)
+  const {
+    addEnemyHero,
+    removeEnemyHero,
+    addTeamHero,
+    removeTeamHero
+  } = useTeamBuilderActions()
+
   const heroesList = useRecoilValue(heroesState)
   const availableHeroesIds = useRecoilValue(availableHeroesIdsSelector)
   const enemies = useRecoilValue(enemyHeroesSelector)
   const team = useRecoilValue(teamHeroesSelector)
 
-  /*const enemyReducer = useSetRecoilState(enemyHeroesSelector)
-  const addEnemyHero = (id) => {
-    console.log('Add enemy', addEnemyHeroAction, id, enemyReducer)
-    enemyReducer({ action : addEnemyHeroAction, payload : id })
-  }*/
+  const [isRecommendedHeroesLoading, recommendedHeroes] = useRecommendedHeroes()
+  const hasRecommendedHeroes = recommendedHeroes.length > 0
 
   return (
     <div>
@@ -45,6 +43,18 @@ export default function TeamBuilder(){
         return (
           <button key={hero.id} onClick={() => removeTeamHero(hero.id)}>
             Remove {hero.name} From My Team
+          </button>
+        )
+      })}
+      <br/>
+      <h3>Recommended Heroes </h3>
+      {isRecommendedHeroesLoading && <h5>Loading Recommendations</h5>}
+      {!isRecommendedHeroesLoading && !hasRecommendedHeroes && <h5>No Recommendations</h5>}
+      {recommendedHeroes.map( heroId => {
+        const hero = heroesList[heroId]
+        return (
+          <button key={hero.id} onClick={() => addTeamHero(hero.id)}>
+            Add {hero.name} From My Team
           </button>
         )
       })}

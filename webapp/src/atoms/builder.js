@@ -1,6 +1,8 @@
-import { atom, selector } from 'recoil'
+import { atom, selector, useRecoilValueLoadable, useRecoilState } from 'recoil'
 
 import { heroesState } from './heroes'
+
+const BASE_URL = "https://dota-recommendation-api-m423ptj4pq-uc.a.run.app"
 
 export const enemyHeroesState = atom({
   key: 'enemyHeroesState',
@@ -16,11 +18,6 @@ export const enemyHeroesSelector = selector({
   key: 'enemyHeroesSelector',
   get: ({get}) => {
     return get(enemyHeroesState)
-  },
-  set : ({get, set}, { action, payload} ) => {
-    const state = get(enemyHeroesState)
-    const nState = action(state, payload)
-    set(enemyHeroesState, nState)
   }
 })
 
@@ -28,72 +25,74 @@ export const teamHeroesSelector = selector({
   key: 'teamHeroesSelector',
   get: ({get}) => {
     return get(teamHeroesState)
-  },
-  set : ({get, set}, action, payload) => {
-    const state = get(teamHeroesState)
-    const nState = action(state, payload)
-    set(teamHeroesState,nState)
   }
 })
 
-export const addEnemyHeroSelector = selector({
-  key: 'addEnemyHeroSelector',
-  get: ({get}) => {
-    return get(enemyHeroesState)
-  },
-  set: ({set, get}, id) => {
-    const enemiesList = get(enemyHeroesState)
-    if(enemiesList.length < 5){
-      const nEnemyList = enemiesList.filter( enemyId => enemyId !== id)
-      set(enemyHeroesState, [...nEnemyList, id])
+const recommendedHeroesSelector = selector({
+  key : 'recommendedHeroesSelector',
+  get: async({ get }) => {
+    const enemies = get(enemyHeroesState)
+    const team = get(teamHeroesState)
+
+    if(enemies.length === 0){
+      return []
     }
+
+    const url = `${BASE_URL}/recommendation?enemies=${enemies.join(',')}&team=${team.join(',')}`
+
+    const res = await fetch(url)
+    if(res.ok){
+      const json = await res.json()
+      return Object.keys(json)
+    }
+    return []
   }
 })
 
-export const addEnemyHeroAction = (state, payload) => {
-  const enemiesList = state
-  if(enemiesList.length < 5){
-    const nEnemyList = enemiesList.filter( enemyId => enemyId !== payload)
-    return [...nEnemyList, payload]
-  }
-  return state
+export function useRecommendedHeroes() {
+  const recommendedHeroes = useRecoilValueLoadable(recommendedHeroesSelector)
+  const isRecommendedHeroesLoading = recommendedHeroes.state === 'loading'
+  const recommendHeroesIds = recommendedHeroes.state === 'hasValue'  ? recommendedHeroes.contents : []
+  return [isRecommendedHeroesLoading, recommendHeroesIds]
 }
 
-export const removeEnemyHeroSelector = selector({
-  key: 'removeEnemyHeroSelector',
-  get: ({get}) => {
-    return get(enemyHeroesState)
-  },
-  set: ({set, get}, id) => {
-    const enemiesList = get(enemyHeroesState).filter(enemyId => enemyId !== id)
-    set(enemyHeroesState, [...enemiesList])
-  }
-})
+export const useTeamBuilderActions = () => {
+  const [enemies, setEnemies] = useRecoilState(enemyHeroesState)
+  const [team, setTeam] = useRecoilState(teamHeroesState)
 
-export const addTeamHeroSelector = selector({
-  key: 'addTeamHeroSelector',
-  get: ({get}) => {
-    return get(teamHeroesState)
-  },
-  set: ({set, get}, id) => {
-    const teamList = get(teamHeroesState)
-    if(teamList.length < 5){
-      const nTeamList = teamList.filter( heroId => heroId !== id)
-      set(teamHeroesState, [...nTeamList, id])
+  const addEnemyHero = (id) => {
+    const enemiesList = enemies
+    if(enemiesList.length < 5){
+      const nEnemyList = enemiesList.filter( enemyId => enemyId !== id)
+      setEnemies([...nEnemyList, id])
     }
   }
-})
 
-export const removeTeamHeroSelector = selector({
-  key: 'removeTeamHeroSelector',
-  get: ({get}) => {
-    return get(teamHeroesState)
-  },
-  set: ({set, get}, id) => {
-    const teamList = get(teamHeroesState).filter(heroId => heroId !== id)
-    set(teamHeroesState, [...teamList])
+  const removeEnemyHero = (id) => {
+    const enemiesList = enemies.filter(enemyId => enemyId !== id)
+    setEnemies([...enemiesList])
   }
-})
+
+  const addTeamHero = (id) => {
+    const teamList = team
+    if(teamList.length < 5){
+      const nTeamList = teamList.filter( heroId => heroId !== id)
+      setTeam([...nTeamList, id])
+    }
+  }
+
+  const removeTeamHero = (id) => {
+    const teamList = team.filter(heroId => heroId !== id)
+    setTeam([...teamList])
+  }
+
+  return {
+    addEnemyHero,
+    removeEnemyHero,
+    addTeamHero,
+    removeTeamHero
+  }
+}
 
 export const availableHeroesIdsSelector = selector({
   key: 'availableHeroesSelector',
