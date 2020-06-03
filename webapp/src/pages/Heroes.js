@@ -9,10 +9,10 @@ import Container from '@material-ui/core/Container'
 
 import { useRecoilValue } from 'recoil'
 
-import { heroesState, isHeroesLoadingState } from '../atoms/heroes'
+import { heroesSelector, isHeroesLoadingState } from '../atoms/heroes'
 
 export default function Heroes(){
-  const heroesList = useRecoilValue(heroesState)
+  const heroesList = useRecoilValue(heroesSelector)
   const isLoading = useRecoilValue(isHeroesLoadingState)
 
   return (

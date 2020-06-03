@@ -2,10 +2,17 @@ import { useEffect } from 'react'
 import { atom, selector, useSetRecoilState } from 'recoil'
 import * as firebase from 'firebase/app'
 
-export const heroesState = atom({
+const heroesState = atom({
   key: 'heroesState',
   default: {},
 });
+
+export const heroesSelector = selector({
+  key: 'heroesSelector',
+  get: ({get}) => {
+    return get(heroesState)
+  }
+})
 
 export const isHeroesLoadingState = atom({
   key : 'isHeroesLoadingState',

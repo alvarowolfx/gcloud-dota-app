@@ -1,6 +1,6 @@
 import { atom, selector, useRecoilValueLoadable, useRecoilState } from 'recoil'
 
-import { heroesState } from './heroes'
+import { heroesSelector } from './heroes'
 
 const BASE_URL = "https://dota-recommendation-api-m423ptj4pq-uc.a.run.app"
 
@@ -86,11 +86,17 @@ export const useTeamBuilderActions = () => {
     setTeam([...teamList])
   }
 
+  const resetBuilder = () => {
+    setTeam([])
+    setEnemies([])
+  }
+
   return {
     addEnemyHero,
     removeEnemyHero,
     addTeamHero,
-    removeTeamHero
+    removeTeamHero,
+    resetBuilder
   }
 }
 
@@ -98,7 +104,7 @@ export const availableHeroesIdsSelector = selector({
   key: 'availableHeroesSelector',
   get: ({get}) => {
     const allPickedHeroes = [...get(enemyHeroesState),...get(teamHeroesState)]
-    const allHeroes = get(heroesState)
+    const allHeroes = get(heroesSelector)
     const heroesIds = Object.keys(allHeroes).filter( heroId => !allPickedHeroes.includes(heroId))
     return heroesIds
   },
