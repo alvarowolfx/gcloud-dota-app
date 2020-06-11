@@ -1,39 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import Avatar from '@material-ui/core/Avatar'
-import ListItemText from '@material-ui/core/ListItemText'
-import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+
+import HeroCard from '../components/HeroCard'
+import HeroGrid from '../components/HeroGrid'
 
 import { useRecoilValue } from 'recoil'
-
 import { heroesSelector, isHeroesLoadingState } from '../atoms/heroes'
 
 export default function Heroes(){
   const heroesList = useRecoilValue(heroesSelector)
   const isLoading = useRecoilValue(isHeroesLoadingState)
 
-  return (
-    <Container>
-      <h2>Heroes</h2>
+  const [search, setSearch] = useState("")
+  const filteredHeroes = Object.values(heroesList).filter( hero => {
+    return hero.name.toLowerCase().includes(search.toLowerCase())
+  })
 
+  return (
+    <div>
+      <TextField
+        label="Search"
+        variant="outlined"
+        value={search}
+        autoFocus
+        fullWidth
+        style={{ marginBottom : 16 }}
+        onChange={(evt) => setSearch(evt.target.value)} />
       {isLoading && <h4>Loading...</h4>}
       {!isLoading && (
-        <List>
-          {Object.values(heroesList).map( hero => {
+        <HeroGrid>
+          {filteredHeroes.map( hero => {
             return (
-            <ListItem key={hero.id}>
-              <ListItemAvatar>
-                <Avatar alt={hero.name} src={hero.imageUrl} />
-              </ListItemAvatar>
-              <ListItemText primary={hero.name} secondary={`Rank ${hero.rank}`} />
-            </ListItem>
+            <HeroCard
+              key={hero.id}
+              hero={hero}/>
           )
         })}
-      </List>
+        </HeroGrid>
       )}
-    </Container>
+    </div>
   )
 }

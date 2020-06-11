@@ -16,7 +16,7 @@ function App() {
     <Container>
       <Router>
         <Header/>
-        <div style={{ marginTop : 72, marginBottom : 72 }}>
+        <div style={{ marginTop : 80, marginBottom : 72 }}>
           <Routes/>
         </div>
         <TabNavigation/>

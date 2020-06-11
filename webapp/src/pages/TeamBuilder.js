@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 
 import { useRecoilValue  } from 'recoil'
+
+import Fab from '@material-ui/core/Fab'
 import Button from '@material-ui/core/Button'
+import ResetIcon from '@material-ui/icons/Refresh'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
+
+import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import { heroesSelector } from '../atoms/heroes'
 import {
@@ -18,6 +24,12 @@ import HeroCard from '../components/HeroCard'
 import AddHeroCard from '../components/AddHeroCard'
 import HeroGrid from '../components/HeroGrid'
 import SelectHeroDialog from '../components/SelectHeroDialog'
+
+const fabStyle = {
+  position : 'absolute',
+  bottom : 80,
+  right : 16
+}
 
 export default function TeamBuilder(){
   const {
@@ -46,15 +58,22 @@ export default function TeamBuilder(){
 
   const onHeroSelected = actionMap[dialogAction]
 
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
+
   return (
     <div>
-      <h2>Team Builder</h2>
-      <Button
+      {isMobile && <Fab color="primary" aria-label="reset"
+        style={fabStyle}
+        onClick={resetBuilder}>
+        <ResetIcon />
+      </Fab>}
+      {!isMobile && <Button
         color="primary"
         variant="contained"
         onClick={resetBuilder}>
         Reset Builder
-      </Button>
+      </Button>}
       <h3>Enemies </h3>
       <HeroGrid>
         {enemies.map( enemyId => {
