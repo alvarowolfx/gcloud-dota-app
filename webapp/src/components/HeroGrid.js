@@ -1,11 +1,11 @@
 import React from 'react'
 
-import GridList from '@material-ui/core/GridList'
+import Grid from '@material-ui/core/Grid'
 
 export default function HeroGrid({ style, children }){
   return (
-    <GridList cellHeight={120} style={style}>
+    <Grid container style={style} spacing={2}>
       {children}
-    </GridList>
+    </Grid>
   )
 }

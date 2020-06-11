@@ -24,25 +24,28 @@ export default function SelectHeroDialog({ heroes, isOpen, onHeroSelected, onClo
   }
 
   return (
-    <Dialog onClose={onDialogClose} open={isOpen}>
+    <Dialog onClose={onDialogClose} open={isOpen} fullWidth>
       <DialogTitle id="simple-dialog-title">Select Hero</DialogTitle>
       <TextField
         label="Search"
         variant="outlined"
         value={search}
         autoFocus
-        style={{ width : '95%', margin : 16}}
+        style={{ margin : 16 }}
         onChange={(evt) => setSearch(evt.target.value)} />
-      <HeroGrid style={{ width : 480, height : 480, padding : 16 }}>
-        {filteredHeroes.map( hero => {
-          return (
-            <HeroCard
-              key={hero.id}
-              hero={hero}
-              onActionClick={() => onSelected(hero.id)}/>
-          )
-        })}
-      </HeroGrid>
+      <div style={{paddingLeft : 16, paddingRight : 16}}>
+        <HeroGrid style={{ height : 480, overflow : 'scroll'  }}>
+          {filteredHeroes.map( hero => {
+            return (
+              <HeroCard
+                key={hero.id}
+                hero={hero}
+                lg={4} md={6}
+                onActionClick={() => onSelected(hero.id)}/>
+            )
+          })}
+        </HeroGrid>
+      </div>
     </Dialog>
   )
 }
