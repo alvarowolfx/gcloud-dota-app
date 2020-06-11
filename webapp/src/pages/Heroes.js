@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 import TextField from '@material-ui/core/TextField'
 import Container from '@material-ui/core/Container'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import HeroCard from '../components/HeroCard'
 import HeroGrid from '../components/HeroGrid'
@@ -25,18 +26,20 @@ export default function Heroes(){
   }
 
   return (
-    <Container style={{ paddingTop : 16 }}>
+    <Container style={{ paddingTop : 16, paddingBottom : 72, height : '100%' }}>
       <TextField
         label="Search"
         variant="outlined"
         value={search}
-        autoFocus
         fullWidth
         style={{ marginBottom : 16 }}
         onChange={(evt) => setSearch(evt.target.value)} />
-      {isLoading && <h4>Loading...</h4>}
+      {isLoading &&
+        <div style={{ display : 'flex', alignContent : 'center', alignItems : 'center'}}>
+          <CircularProgress color="primary" style={{margin : '0 auto'}} />
+        </div>}
       {!isLoading && (
-        <HeroGrid>
+        <HeroGrid style={{ height : '100%', overflow : 'scroll'}}>
           {filteredHeroes.map( hero => {
             return (
             <HeroCard

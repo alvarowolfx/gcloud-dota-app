@@ -1,5 +1,53 @@
+html,
+#root,
+.AppContainer {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  /*background-color: #c62828 !important;*/
+  height: 100%;
+  overflow: hidden;
+
+  padding-bottom: 0px;
+}
+
+.tabNavigation {
+  padding-bottom: 0px;
+  -webkit-box-shadow: 2px -2px 7px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 2px -2px 7px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px -2px 7px 1px rgba(0, 0, 0, 0.25);
+}
+
+.HeroTabs {
+  height: calc(100% - 240px - 56px);
+}
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .AppBar {
+    --safe-area-inset-top: env(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+  }
+}
+@supports (padding-top: env(safe-area-inset-top)) {
+  .AppContainer {
+    margin-top: calc(56px + env(safe-area-inset-top)) !important;
+    overflow: hidden;
+    padding-bottom: calc(56px + 56px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .HeroTabs {
+    height: calc(100% - 240px - 32px - env(safe-area-inset-bottom));
+  }
+}
+
 .App {
-  text-align: center;
+  background-color: white;
+  height: 100%;
+  overflow: hidden;
 }
 
 .App-logo {

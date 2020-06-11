@@ -74,7 +74,7 @@ export default function Hero(){
   }
 
   return (
-    <div>
+    <div style={{ height : '100%'}}>
       <div style={{position : 'relative', display : 'block'}}>
         <img src={hero.imageUrl} alt={hero.name} style={imgStyle} />
         <div style={titlebarStyle}>
@@ -94,12 +94,14 @@ export default function Hero(){
         <Tab label="Best Heroes" value="bestHeroes" textColor="primary"/>
         <Tab label="Worst Heroes" value="worstHeroes" textColor="primary"/>
       </Tabs>
-      <Container style={{ paddingTop : 16 }}>
-        { currentTab === 'bestHeroes' &&
-          <RecommendedHeroGrid heroes={bestHeroesIds.map( id => heroesList[id])} onClick={goToHero}/>}
-        { currentTab === 'worstHeroes' &&
-          <RecommendedHeroGrid heroes={worstHeroesIds.map( id => heroesList[id])} onClick={goToHero}/>}
-      </Container>
+      <div className="HeroTabs">
+        <Container style={{ paddingTop : 16, overflowY : 'scroll', overflowX : 'hidden', height : '100%' }}>
+          { currentTab === 'bestHeroes' &&
+            <RecommendedHeroGrid heroes={bestHeroesIds.map( id => heroesList[id])} onClick={goToHero}/>}
+          { currentTab === 'worstHeroes' &&
+            <RecommendedHeroGrid heroes={worstHeroesIds.map( id => heroesList[id])} onClick={goToHero}/>}
+        </Container>
+      </div>
     </div>
   )
 }

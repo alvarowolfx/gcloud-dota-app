@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useRecoilValue  } from 'recoil'
 
 import Fab from '@material-ui/core/Fab'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import ResetIcon from '@material-ui/icons/Refresh'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
@@ -64,7 +65,7 @@ export default function TeamBuilder(){
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
 
   return (
-    <Container style={{ paddingTop : 16 }}>
+    <Container style={{ paddingTop : 16, height : '100%', overflowX : 'hidden', overflowY : 'scroll' }}>
       {isMobile && <Fab color="primary" aria-label="reset"
         style={fabStyle}
         onClick={resetBuilder}>
@@ -112,9 +113,17 @@ export default function TeamBuilder(){
         }}/>}
       </HeroGrid>
       <br/>
-      <h3>Recommended Heroes </h3>
-      {isRecommendedHeroesLoading && <h5>Loading Recommendations</h5>}
-      {!isRecommendedHeroesLoading && !hasRecommendedHeroes && <h5>No Recommendations</h5>}
+      <h3>Recommended Heroes</h3>
+      {!hasRecommendedHeroes && (
+        <div style={{ display : 'flex', alignContent : 'center', alignItems : 'center'}}>
+          <h5 style={{ margin : '0 auto' }}>No Recommendations</h5>
+        </div>
+      )}
+      {isRecommendedHeroesLoading && enemies.length > 0 && (
+        <div style={{ display : 'flex', alignContent : 'center', alignItems : 'center'}}>
+          <CircularProgress color="primary" style={{margin : '0 auto'}} />
+        </div>
+      ) }
       <HeroGrid>
         {recommendedHeroes.map( heroId => {
           const hero = heroesList[heroId]

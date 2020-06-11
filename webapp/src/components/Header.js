@@ -39,7 +39,7 @@ export default function Header(){
   }
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" className="AppBar">
       <Toolbar>
         {canGoBack && <IconButton edge="start" color="inherit" aria-label="back"
           onClick={goBack}>

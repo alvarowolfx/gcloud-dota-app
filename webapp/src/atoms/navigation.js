@@ -1,6 +1,8 @@
-
-import { useEffect } from 'react';
+/* eslint-disable react/react-in-jsx-scope */
+import React, { useEffect } from 'react'
 import { atom, selector, useRecoilState } from 'recoil'
+import { Router } from "react-router"
+import { createBrowserHistory } from "history"
 
 const navigationState = atom({
   key: 'navigationState',
@@ -14,7 +16,9 @@ export const navigationStateSelector = selector({
   }
 });
 
-export function useNavigation(history) {
+const history = createBrowserHistory()
+
+export function NavigationRouter({ children }) {
   const [navigation, setNavigation] = useRecoilState(navigationState)
 
   useEffect( () => {
@@ -39,4 +43,10 @@ export function useNavigation(history) {
       }
     })
   })
+
+  return (
+    <Router history={history}>
+      {children}
+    </Router>
+  )
 }

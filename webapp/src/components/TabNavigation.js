@@ -13,8 +13,9 @@ export default function TabNavigation(){
 
   return (
     <BottomNavigation
-      style={{ position : 'fixed', bottom : '0', left:'0', right : '0' }}
       value={location.pathname}
+      className="tabNavigation"
+      style={{ position : 'fixed', bottom : '0', left:'0', right : '0' }}
       onChange={(event, value) => {
         history.replace(value)
       }}

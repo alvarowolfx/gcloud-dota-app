@@ -18,14 +18,12 @@ const firebaseConfig = require('./firebase-config.json')
 firebase.initializeApp(firebaseConfig)
 
 ReactDOM.render(
-  <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <RecoilRoot>
         <App />
       </RecoilRoot>
-    </ThemeProvider>
-  </React.StrictMode>,
+    </ThemeProvider>,
   document.getElementById('root')
 );
 

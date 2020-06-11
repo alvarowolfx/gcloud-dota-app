@@ -1,10 +1,6 @@
 import React from 'react';
 import './App.css';
 
-//import { BrowserRouter as Router } from 'react-router-dom'
-import { Router } from "react-router"
-import { createBrowserHistory } from "history"
-
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
@@ -13,26 +9,30 @@ import Header from './components/Header'
 import TabNavigation from './components/TabNavigation'
 
 import { useHeroesList } from './atoms/heroes'
-import { useNavigation } from './atoms/navigation'
-
-const history = createBrowserHistory()
+import { NavigationRouter } from './atoms/navigation'
 
 function App() {
   useHeroesList()
-  useNavigation(history)
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
 
   return (
-    <div>
-      <Router history={history}>
+    <div className="App">
+      <NavigationRouter>
         <Header/>
-        <div style={{ marginTop : isMobile ? 56 : 64, marginBottom : 72 }}>
+        <div className="AppContainer" style={{
+          marginTop : isMobile ? 56 : 64,
+          //marginBottom : 56,
+          paddingBottom : 56*2,
+          //paddingTop : isMobile ? 56 : 64,
+          overflow : 'hidden',
+          height : '100%'
+        }}>
           <Routes/>
+          <TabNavigation/>
         </div>
-        <TabNavigation/>
-      </Router>
+      </NavigationRouter>
     </div>
   );
 }

@@ -30,12 +30,12 @@ export const teamHeroesSelector = selector({
 
 const recommendedHeroesSelector = selector({
   key : 'recommendedHeroesSelector',
-  get: async({ get }) => {
+  get: async({ get, set }) => {
     const enemies = get(enemyHeroesState)
     const team = get(teamHeroesState)
 
     if(enemies.length === 0){
-      return []
+      return Promise.resolve([])
     }
 
     const url = `${BASE_URL}/recommendation?enemies=${enemies.join(',')}&team=${team.join(',')}`
@@ -45,7 +45,7 @@ const recommendedHeroesSelector = selector({
       const json = await res.json()
       return Object.keys(json)
     }
-    return []
+    return Promise.resolve([])
   }
 })
 

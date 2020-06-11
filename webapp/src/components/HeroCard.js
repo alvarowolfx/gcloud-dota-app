@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 
 const paperStyle = {
   height : 120,
+  cursor : 'pointer',
   position : 'relative',
   display : 'block'
 }

@@ -16,23 +16,10 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
-  overrides : {
-    MuiTabs : {
-      root : {
-        //backgroundColor : red[800]
-      },
+  props : {
+    MuiButtonBase: {
+      disableRipple: true, // No more ripple
     },
-    MuiTab : {
-      textColorPrimary : {
-        color : '#CCC',
-      },
-      textColorInherit : {
-        color : '#FFF'
-      },
-      selected : {
-        color : '#FFF',
-      }
-    }
   }
 });
 
