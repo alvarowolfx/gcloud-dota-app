@@ -1,14 +1,7 @@
 import React, { useState } from 'react'
 
 import { useRecoilValue  } from 'recoil'
-import GridList from '@material-ui/core/GridList'
-import GridListTile from '@material-ui/core/GridListTile'
-import GridListTileBar from '@material-ui/core/GridListTileBar'
-import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
 
@@ -21,89 +14,10 @@ import {
   teamHeroesSelector,
 } from '../atoms/builder'
 
-export function HeroCard({ hero, actionIcon, onActionClick }){
-  return (
-    <GridListTile key={hero.id} style={{ height : 120, width: 180, margin : 16 }}
-      onClick={!actionIcon ? onActionClick : undefined}>
-      <img src={hero.imageUrl} alt={hero.name} />
-      <GridListTileBar
-        title={hero.name}
-        subtitle={<span>Rank: {hero.rank}</span>}
-        actionIcon={
-          actionIcon && <IconButton color="primary"
-            onClick={() => onActionClick(hero.id)}>
-            {actionIcon}
-          </IconButton>
-        }
-      />
-    </GridListTile>
-  )
-}
-
-function AddHeroCard({ onClick }){
-  return (
-    <GridListTile
-      onClick={onClick}
-      style={{ height : 120, width: 180, margin : 16 }}>
-      <div style={{
-        display : 'flex',
-        backgroundColor : 'lightgray',
-        alignItems : 'center',
-        height : 120
-      }}>
-        <AddIcon fontSize="large" style={{ margin : '0 auto'}}/>
-      </div>
-    </GridListTile>
-  )
-}
-
-function HeroGrid({ style, children }){
-  return (
-    <GridList cellHeight={120} style={style}>
-      {children}
-    </GridList>
-  )
-}
-
-function SelectHeroDialog({ heroes, isOpen, onHeroSelected, onClose }){
-  const [search, setSearch] = useState("")
-  const filteredHeroes = heroes.filter( hero => {
-    return hero.name.toLowerCase().includes(search.toLowerCase())
-  })
-
-  const onDialogClose = () => {
-    setSearch("")
-    onClose()
-  }
-
-  const onSelected = (id) => {
-    setSearch("")
-    onHeroSelected(id)
-  }
-
-  return (
-    <Dialog onClose={onDialogClose} open={isOpen}>
-      <DialogTitle id="simple-dialog-title">Select Hero</DialogTitle>
-      <TextField
-        label="Search"
-        variant="outlined"
-        value={search}
-        autoFocus
-        style={{ width : '95%', margin : 16}}
-        onChange={(evt) => setSearch(evt.target.value)} />
-      <HeroGrid style={{ width : 480, height : 480, padding : 16 }}>
-        {filteredHeroes.map( hero => {
-          return (
-            <HeroCard
-              key={hero.id}
-              hero={hero}
-              onActionClick={() => onSelected(hero.id)}/>
-          )
-        })}
-      </HeroGrid>
-    </Dialog>
-  )
-}
+import HeroCard from '../components/HeroCard'
+import AddHeroCard from '../components/AddHeroCard'
+import HeroGrid from '../components/HeroGrid'
+import SelectHeroDialog from '../components/SelectHeroDialog'
 
 export default function TeamBuilder(){
   const {

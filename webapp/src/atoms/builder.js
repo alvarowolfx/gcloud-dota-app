@@ -4,7 +4,7 @@ import { heroesSelector } from './heroes'
 
 const BASE_URL = "https://dota-recommendation-api-m423ptj4pq-uc.a.run.app"
 
-export const enemyHeroesState = atom({
+const enemyHeroesState = atom({
   key: 'enemyHeroesState',
   default: [],
 });
