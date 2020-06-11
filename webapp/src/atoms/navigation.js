@@ -4,7 +4,7 @@ import { atom, selector, useRecoilState } from 'recoil'
 
 const navigationState = atom({
   key: 'navigationState',
-  default: [],
+  default: ['/builder'],
 });
 
 export const navigationStateSelector = selector({

@@ -20,7 +20,7 @@ export default function Header(){
   const heroesList = useRecoilValue(heroesSelector)
   const heroId = match && match.params && match.params.heroId
 
-  const hasHistory = navigation.length > 0
+  const hasHistory = navigation.length > 1
   const canGoBack = hasHistory || !!heroId
   let title = 'Dota App'
   if(canGoBack){
