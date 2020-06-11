@@ -4,6 +4,7 @@ import { useRecoilValue  } from 'recoil'
 
 import Fab from '@material-ui/core/Fab'
 import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
 import ResetIcon from '@material-ui/icons/Refresh'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
@@ -63,7 +64,7 @@ export default function TeamBuilder(){
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
 
   return (
-    <div>
+    <Container style={{ paddingTop : 16 }}>
       {isMobile && <Fab color="primary" aria-label="reset"
         style={fabStyle}
         onClick={resetBuilder}>
@@ -137,6 +138,6 @@ export default function TeamBuilder(){
         onClose={() => {
           setHeroDialogOpen(false)
         }} />
-    </div>
+    </Container>
   )
 }

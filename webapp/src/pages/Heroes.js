@@ -1,25 +1,31 @@
 import React, { useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { useHistory } from 'react-router-dom'
 
-import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
+import Container from '@material-ui/core/Container'
 
 import HeroCard from '../components/HeroCard'
 import HeroGrid from '../components/HeroGrid'
 
-import { useRecoilValue } from 'recoil'
 import { heroesSelector, isHeroesLoadingState } from '../atoms/heroes'
 
 export default function Heroes(){
   const heroesList = useRecoilValue(heroesSelector)
   const isLoading = useRecoilValue(isHeroesLoadingState)
+  const history = useHistory()
 
   const [search, setSearch] = useState("")
   const filteredHeroes = Object.values(heroesList).filter( hero => {
     return hero.name.toLowerCase().includes(search.toLowerCase())
   })
 
+  const goToHero = (id) => {
+    history.push(`/heroes/${id}`)
+  }
+
   return (
-    <div>
+    <Container style={{ paddingTop : 16 }}>
       <TextField
         label="Search"
         variant="outlined"
@@ -35,11 +41,12 @@ export default function Heroes(){
             return (
             <HeroCard
               key={hero.id}
-              hero={hero}/>
+              hero={hero}
+              onActionClick={() => goToHero(hero.id)} />
           )
         })}
         </HeroGrid>
       )}
-    </div>
+    </Container>
   )
 }

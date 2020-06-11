@@ -16,6 +16,24 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  overrides : {
+    MuiTabs : {
+      root : {
+        //backgroundColor : red[800]
+      },
+    },
+    MuiTab : {
+      textColorPrimary : {
+        color : '#CCC',
+      },
+      textColorInherit : {
+        color : '#FFF'
+      },
+      selected : {
+        color : '#FFF',
+      }
+    }
+  }
 });
 
 export default theme;
