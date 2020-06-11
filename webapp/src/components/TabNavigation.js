@@ -16,7 +16,7 @@ export default function TabNavigation(){
       style={{ position : 'fixed', bottom : '0', left:'0', right : '0' }}
       value={location.pathname}
       onChange={(event, value) => {
-        history.push(value)
+        history.replace(value)
       }}
       showLabels
     >

@@ -21,7 +21,7 @@ export default function AddHeroCard({ onClick }){
       onClick={onClick}>
       <Paper elevation={3} style={paperStyle}>
         <div style={innerCardStyle}>
-          <AddIcon fontSize="large" style={{ margin : '0 auto'}}/>
+          <AddIcon fontSize="large" color="primary" style={{ margin : '0 auto'}}/>
         </div>
       </Paper>
     </Grid>

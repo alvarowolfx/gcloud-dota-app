@@ -26,9 +26,10 @@ import HeroGrid from '../components/HeroGrid'
 import SelectHeroDialog from '../components/SelectHeroDialog'
 
 const fabStyle = {
-  position : 'absolute',
+  position : 'fixed',
   bottom : 80,
-  right : 16
+  right : 16,
+  zIndex : 999
 }
 
 export default function TeamBuilder(){

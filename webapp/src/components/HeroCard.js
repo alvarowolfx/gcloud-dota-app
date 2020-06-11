@@ -49,7 +49,7 @@ export default function HeroCard({ hero, actionIcon, onActionClick, ...rest }){
             <Typography variant="caption" style={whiteBoldTextStyle}>{hero.name}</Typography>
             <Typography variant="caption" style={whiteTextStyle}>Rank: {hero.rank}</Typography>
           </div>
-          {actionIcon && <IconButton color="primary"
+          {actionIcon && <IconButton color="secondary"
               onClick={() => onActionClick(hero.id)}>
               {actionIcon}
           </IconButton>}
